@@ -1,9 +1,9 @@
-package ru.job4j.utilites;
+package ru.job4j.cinema.utilites;
 
 import org.springframework.ui.Model;
-import ru.job4j.model.Session;
-import ru.job4j.model.Ticket;
-import ru.job4j.model.User;
+import ru.job4j.cinema.model.Session;
+import ru.job4j.cinema.model.Ticket;
+import ru.job4j.cinema.model.User;
 
 import javax.servlet.http.HttpSession;
 

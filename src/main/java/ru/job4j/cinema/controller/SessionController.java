@@ -1,11 +1,11 @@
-package ru.job4j.controller;
+package ru.job4j.cinema.controller;
 
 import net.jcip.annotations.ThreadSafe;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
-import ru.job4j.model.Session;
-import ru.job4j.service.SessionService;
+import ru.job4j.cinema.model.Session;
+import ru.job4j.cinema.service.SessionService;
 
 @ThreadSafe
 @Controller

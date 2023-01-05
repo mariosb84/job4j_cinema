@@ -1,9 +1,9 @@
-package ru.job4j.service;
+package ru.job4j.cinema.service;
 
 import net.jcip.annotations.ThreadSafe;
 import org.springframework.stereotype.Service;
-import ru.job4j.model.Ticket;
-import ru.job4j.store.TicketDbStore;
+import ru.job4j.cinema.model.Ticket;
+import ru.job4j.cinema.repository.TicketDbStore;
 
 import java.util.List;
 import java.util.Optional;

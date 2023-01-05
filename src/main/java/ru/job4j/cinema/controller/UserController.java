@@ -1,4 +1,4 @@
-package ru.job4j.controller;
+package ru.job4j.cinema.controller;
 
 import net.jcip.annotations.ThreadSafe;
 import org.springframework.stereotype.Controller;
@@ -7,9 +7,9 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-import ru.job4j.model.User;
-import ru.job4j.service.UserService;
-import ru.job4j.utilites.Sessions;
+import ru.job4j.cinema.model.User;
+import ru.job4j.cinema.utilites.Sessions;
+import ru.job4j.cinema.service.UserService;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;

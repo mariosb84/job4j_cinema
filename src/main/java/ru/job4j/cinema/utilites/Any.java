@@ -1,4 +1,4 @@
-package ru.job4j.utilites;
+package ru.job4j.cinema.utilites;
 
 import java.util.HashSet;
 

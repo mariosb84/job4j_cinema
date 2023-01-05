@@ -1,7 +1,7 @@
-package ru.job4j.filter;
+package ru.job4j.cinema.filter;
 
 import org.springframework.stereotype.Component;
-import ru.job4j.utilites.Any;
+import ru.job4j.cinema.utilites.Any;
 
 import javax.servlet.*;
 import javax.servlet.http.HttpServletRequest;
