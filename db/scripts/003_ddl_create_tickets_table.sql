@@ -1,4 +1,4 @@
-CREATE TABLE if not exists ticket (
+CREATE TABLE if not exists tickets (
     id SERIAL PRIMARY KEY,
     session_id INT NOT NULL REFERENCES sessions(id),
     pos_row INT NOT NULL,

@@ -17,11 +17,11 @@ import java.util.Optional;
 @Repository
 public class TicketDbStore {
 
-    private final static String FIND_ALL = "SELECT * FROM ticket ORDER BY id";
+    private final static String FIND_ALL = "SELECT * FROM tickets ORDER BY id";
 
-    private final static String ADD = "INSERT INTO ticket(session_id, pos_row, cell, user_id) VALUES (?, ?, ?, ?)";
+    private final static String ADD = "INSERT INTO tickets(session_id, pos_row, cell, user_id) VALUES (?, ?, ?, ?)";
 
-    private final static String FIND_BY_ID = "SELECT * FROM ticket WHERE id = ?";
+    private final static String FIND_BY_ID = "SELECT * FROM tickets WHERE id = ?";
 
     private static final Logger LOG = LoggerFactory.getLogger(TicketDbStore.class.getName());
 
