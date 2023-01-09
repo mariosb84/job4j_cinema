@@ -1,12 +1,12 @@
 package ru.job4j.cinema.repository;
 
 
-import org.apache.commons.dbcp2.BasicDataSource;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Repository;
 import ru.job4j.cinema.model.User;
 
+import javax.sql.DataSource;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -22,15 +22,15 @@ public class UserDbStore {
 
     private static final Logger LOG_USER = LoggerFactory.getLogger(SessionDbStore.class.getName());
 
-    private final BasicDataSource pool;
+    private final DataSource dataSource;
 
-    public UserDbStore(BasicDataSource pool) {
-        this.pool = pool;
+    public UserDbStore(DataSource dataSource) {
+        this.dataSource = dataSource;
     }
 
     public Optional<User> add(User user) {
         Optional<User> result = Optional.empty();
-        try (Connection cn = pool.getConnection();
+        try (Connection cn = dataSource.getConnection();
              PreparedStatement ps =  cn.prepareStatement(ADD_USER,
                      PreparedStatement.RETURN_GENERATED_KEYS)) {
             ps.setString(1, user.getUsername());
@@ -51,7 +51,7 @@ public class UserDbStore {
 
     public Optional<User> findUserByNameEmailPhone(String username, String email, String phone) {
         Optional<User> result = Optional.empty();
-        try (Connection cn = pool.getConnection();
+        try (Connection cn = dataSource.getConnection();
              PreparedStatement ps =  cn.prepareStatement(FIND_BY_USERNAME_AND_EMAIL_AND_PHONE_USER)) {
             ps.setString(1, username);
                     ps.setString(2, email);

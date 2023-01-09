@@ -6,6 +6,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Repository;
 import ru.job4j.cinema.model.Ticket;
 
+import javax.sql.DataSource;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -25,15 +26,15 @@ public class TicketDbStore {
 
     private static final Logger LOG = LoggerFactory.getLogger(TicketDbStore.class.getName());
 
-    private final BasicDataSource pool;
+    private final DataSource dataSource;
 
-    public TicketDbStore(BasicDataSource pool) {
-        this.pool = pool;
+    public TicketDbStore(DataSource dataSource) {
+        this.dataSource = dataSource;
     }
 
     public List<Optional<Ticket>> findAll() {
         List<Optional<Ticket>> tickets = new ArrayList<>();
-        try (Connection cn = pool.getConnection();
+        try (Connection cn = dataSource.getConnection();
              PreparedStatement ps =  cn.prepareStatement(FIND_ALL)) {
             try (ResultSet it = ps.executeQuery()) {
                 while (it.next()) {
@@ -49,7 +50,7 @@ public class TicketDbStore {
 
     public Optional<Ticket> add(Ticket ticket) {
         Optional<Ticket> result = Optional.empty();
-        try (Connection cn = pool.getConnection();
+        try (Connection cn = dataSource.getConnection();
              PreparedStatement ps =  cn.prepareStatement(ADD,
                      PreparedStatement.RETURN_GENERATED_KEYS)) {
             ps.setInt(1, ticket.getSessionId());
@@ -83,7 +84,7 @@ public class TicketDbStore {
 
     public Optional<Ticket> findById(int id) {
         Optional<Ticket> result = Optional.empty();
-        try (Connection cn = pool.getConnection();
+        try (Connection cn = dataSource.getConnection();
              PreparedStatement ps =  cn.prepareStatement(FIND_BY_ID)) {
             ps.setInt(1, id);
             try (ResultSet it = ps.executeQuery()) {

@@ -1,11 +1,11 @@
 package ru.job4j.cinema.repository;
 
-import org.apache.commons.dbcp2.BasicDataSource;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Repository;
 import ru.job4j.cinema.model.Session;
 
+import javax.sql.DataSource;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -25,15 +25,15 @@ public class SessionDbStore {
 
     private static final Logger LOG_SESSION = LoggerFactory.getLogger(SessionDbStore.class.getName());
 
-    private final BasicDataSource pool;
+    private final DataSource dataSource;
 
-    public SessionDbStore(BasicDataSource pool) {
-        this.pool = pool;
+    public SessionDbStore(DataSource dataSource) {
+        this.dataSource = dataSource;
     }
 
     public List<Session> findAll() {
         List<Session> sessions = new ArrayList<>();
-        try (Connection cn = pool.getConnection();
+        try (Connection cn = dataSource.getConnection();
              PreparedStatement ps =  cn.prepareStatement(FIND_ALL_SESSIONS)) {
             try (ResultSet it = ps.executeQuery()) {
                 while (it.next()) {
@@ -48,7 +48,7 @@ public class SessionDbStore {
 
 
     public Session add(Session session) {
-        try (Connection cn = pool.getConnection();
+        try (Connection cn = dataSource.getConnection();
              PreparedStatement ps =  cn.prepareStatement(ADD_SESSION,
                      PreparedStatement.RETURN_GENERATED_KEYS)) {
             ps.setString(1, session.getName());
@@ -65,7 +65,7 @@ public class SessionDbStore {
     }
 
     public void update(Session session) {
-        try (Connection cn = pool.getConnection();
+        try (Connection cn = dataSource.getConnection();
              PreparedStatement ps =  cn.prepareStatement(UPDATE_SESSION)) {
             ps.setString(1, session.getName());
             ps.setInt(2, session.getId());
@@ -77,7 +77,7 @@ public class SessionDbStore {
 
     public Session findById(int id) {
         Session result = null;
-        try (Connection cn = pool.getConnection();
+        try (Connection cn = dataSource.getConnection();
              PreparedStatement ps =  cn.prepareStatement(FIND_BY_ID_SESSION)) {
             ps.setInt(1, id);
             try (ResultSet it = ps.executeQuery()) {
@@ -92,7 +92,7 @@ public class SessionDbStore {
     }
 
     public void delete(Session session) {
-        try (Connection cn = pool.getConnection();
+        try (Connection cn = dataSource.getConnection();
              PreparedStatement ps =
                      cn.prepareStatement(DELETE_SESSION)) {
             ps.setInt(1, session.getId());
