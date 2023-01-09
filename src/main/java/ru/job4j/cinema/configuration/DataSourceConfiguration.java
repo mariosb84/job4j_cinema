@@ -9,11 +9,11 @@ import org.springframework.context.annotation.PropertySource;
 import javax.sql.DataSource;
 
 @Configuration
-@PropertySource("classpath:db.properties") // указывает откуда читаем настройки
+@PropertySource("classpath:db.properties") /* указывает откуда читаем настройки*/
 public class DataSourceConfiguration {
 
     @Bean
-    public DataSource loadPool(@Value("${jdbc.driver}") String driver, // читаем настройки указанные в ${}
+    public DataSource loadPool(@Value("${jdbc.driver}") String driver, /* читаем настройки указанные в ${}*/
                                @Value("${jdbc.url}") String url,
                                @Value("${jdbc.username}") String username,
                                @Value("${jdbc.password}") String password) {
