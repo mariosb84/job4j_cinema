@@ -1,6 +1,5 @@
 package ru.job4j.cinema.repository;
 
-import org.apache.commons.dbcp2.BasicDataSource;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Repository;
@@ -16,7 +15,7 @@ import java.util.List;
 import java.util.Optional;
 
 @Repository
-public class TicketDbStore {
+public class JdbcTicketRepository implements TicketRepository {
 
     private final static String FIND_ALL = "SELECT * FROM tickets ORDER BY id";
 
@@ -24,11 +23,11 @@ public class TicketDbStore {
 
     private final static String FIND_BY_ID = "SELECT * FROM tickets WHERE id = ?";
 
-    private static final Logger LOG = LoggerFactory.getLogger(TicketDbStore.class.getName());
+    private static final Logger LOG = LoggerFactory.getLogger(JdbcTicketRepository.class.getName());
 
     private final DataSource dataSource;
 
-    public TicketDbStore(DataSource dataSource) {
+    public JdbcTicketRepository(DataSource dataSource) {
         this.dataSource = dataSource;
     }
 

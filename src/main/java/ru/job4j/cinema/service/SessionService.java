@@ -3,7 +3,7 @@ package ru.job4j.cinema.service;
 import net.jcip.annotations.ThreadSafe;
 import org.springframework.stereotype.Service;
 import ru.job4j.cinema.model.Session;
-import ru.job4j.cinema.repository.SessionDbStore;
+import ru.job4j.cinema.repository.SessionRepository;
 
 import java.util.Collection;
 
@@ -11,9 +11,9 @@ import java.util.Collection;
 @Service
 public class SessionService {
 
-        private final SessionDbStore store;
+        private final SessionRepository store;
 
-        public SessionService(SessionDbStore store) {
+        public SessionService(SessionRepository store) {
             this.store = store;
         }
 

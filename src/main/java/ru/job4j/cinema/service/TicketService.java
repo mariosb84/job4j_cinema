@@ -3,7 +3,7 @@ package ru.job4j.cinema.service;
 import net.jcip.annotations.ThreadSafe;
 import org.springframework.stereotype.Service;
 import ru.job4j.cinema.model.Ticket;
-import ru.job4j.cinema.repository.TicketDbStore;
+import ru.job4j.cinema.repository.TicketRepository;
 
 import java.util.List;
 import java.util.Optional;
@@ -12,9 +12,9 @@ import java.util.Optional;
 @Service
 public class TicketService {
 
-        private final TicketDbStore store;
+        private final TicketRepository store;
 
-        public TicketService(TicketDbStore store) {
+        public TicketService(TicketRepository store) {
             this.store = store;
         }
 

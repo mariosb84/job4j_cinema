@@ -14,17 +14,17 @@ import java.sql.SQLException;
 import java.util.Optional;
 
 @Repository
-public class UserDbStore {
+public class JdbcUserRepository implements UserRepository {
 
     private final static String ADD_USER = "INSERT INTO users(username, email, phone) VALUES (?, ?, ?)";
 
     private final static String FIND_BY_USERNAME_AND_EMAIL_AND_PHONE_USER  = "SELECT * FROM users WHERE username = ? AND email = ? AND phone = ?";
 
-    private static final Logger LOG_USER = LoggerFactory.getLogger(SessionDbStore.class.getName());
+    private static final Logger LOG_USER = LoggerFactory.getLogger(JdbcSessionRepository.class.getName());
 
     private final DataSource dataSource;
 
-    public UserDbStore(DataSource dataSource) {
+    public JdbcUserRepository(DataSource dataSource) {
         this.dataSource = dataSource;
     }
 

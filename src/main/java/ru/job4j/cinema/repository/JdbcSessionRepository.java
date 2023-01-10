@@ -11,7 +11,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Repository
-public class SessionDbStore {
+public class JdbcSessionRepository implements SessionRepository {
 
     private final static String FIND_ALL_SESSIONS = "SELECT * FROM sessions ORDER BY id";
 
@@ -21,13 +21,11 @@ public class SessionDbStore {
 
     private final static String FIND_BY_ID_SESSION = "SELECT * FROM sessions WHERE id = ?";
 
-    private final static String DELETE_SESSION = "DELETE FROM sessions WHERE id = ?";
-
-    private static final Logger LOG_SESSION = LoggerFactory.getLogger(SessionDbStore.class.getName());
+    private static final Logger LOG_SESSION = LoggerFactory.getLogger(JdbcSessionRepository.class.getName());
 
     private final DataSource dataSource;
 
-    public SessionDbStore(DataSource dataSource) {
+    public JdbcSessionRepository(DataSource dataSource) {
         this.dataSource = dataSource;
     }
 
@@ -89,17 +87,6 @@ public class SessionDbStore {
             LOG_SESSION.error("Exception in  findById() method", e);
         }
         return result;
-    }
-
-    public void delete(Session session) {
-        try (Connection cn = dataSource.getConnection();
-             PreparedStatement ps =
-                     cn.prepareStatement(DELETE_SESSION)) {
-            ps.setInt(1, session.getId());
-            ps.executeUpdate();
-        } catch (Exception e) {
-            LOG_SESSION.error("Exception in  delete() method", e);
-        }
     }
 
     private Session addSession(ResultSet resultset) throws SQLException {

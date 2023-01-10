@@ -3,7 +3,7 @@ package ru.job4j.cinema.service;
 import net.jcip.annotations.ThreadSafe;
 import org.springframework.stereotype.Service;
 import ru.job4j.cinema.model.User;
-import ru.job4j.cinema.repository.UserDbStore;
+import ru.job4j.cinema.repository.UserRepository;
 
 import java.util.Optional;
 
@@ -11,9 +11,9 @@ import java.util.Optional;
 @Service
 public class UserService {
 
-    private final UserDbStore store;
+    private final UserRepository store;
 
-    public UserService(UserDbStore store) {
+    public UserService(UserRepository store) {
         this.store = store;
     }
 
