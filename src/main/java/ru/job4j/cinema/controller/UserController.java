@@ -8,8 +8,8 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import ru.job4j.cinema.model.User;
-import ru.job4j.cinema.utilites.Sessions;
 import ru.job4j.cinema.service.UserService;
+import ru.job4j.cinema.utilites.Sessions;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;

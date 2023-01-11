@@ -1,35 +1,17 @@
 package ru.job4j.cinema.service;
 
-import net.jcip.annotations.ThreadSafe;
-import org.springframework.stereotype.Service;
 import ru.job4j.cinema.model.Session;
-import ru.job4j.cinema.repository.SessionRepository;
 
 import java.util.Collection;
 
-@ThreadSafe
-@Service
-public class SessionService {
+public interface SessionService {
 
-        private final SessionRepository store;
+    Collection<Session> findAll();
 
-        public SessionService(SessionRepository store) {
-            this.store = store;
-        }
+    void add(Session session);
 
-        public Collection<Session> findAll() {
-            return store.findAll();
-        }
+    Session findById(int id);
 
-        public void add(Session session) {
-            store.add(session);
-        }
+    void update(Session session);
 
-        public Session findById(int id) {
-            return store.findById(id);
-        }
-
-        public void update(Session session) {
-            store.update(session);
-        }
 }
